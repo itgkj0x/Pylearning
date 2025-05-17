@@ -1,0 +1,15 @@
+import glob
+import subprocess
+import shutil
+
+files = glob.glob("*/*.ipynb")
+
+print(files[1])
+i = 0
+
+while i <= (len(files)-1):
+    pathj = files[i]
+    result = subprocess.run(['jupyter', 'nbconvert','--to','html',pathj], shell=True,stdout=subprocess.PIPE)
+    pathh = pathj.replace('.ipynb','.html')
+    shutil.move(pathh, '.html')
+    i = i+1 
