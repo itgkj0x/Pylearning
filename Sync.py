@@ -1,11 +1,15 @@
 import glob
 import subprocess
 import shutil
+import os
 
 files = glob.glob("*/*.ipynb")
 
 print(files[1])
 i = 0
+
+if not os.path.exists('html'):
+    os.makedirs('html')
 
 while i <= (len(files)-1):
     pathj = files[i]
