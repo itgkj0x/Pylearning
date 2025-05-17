@@ -1,7 +1,7 @@
 import glob
 import os
 
-files = glob.glob("html/*.html")
+files = glob.glob("Build/html/*.html")
 i = 0
 
 while i <= (len(files)-1):
