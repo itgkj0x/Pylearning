@@ -25,10 +25,10 @@ jobs:
 
       - name: Run build script
         run: |
-          pipenv run python build.py
+          pipenv run python Build.py
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./Build/html
+          publish_dir: ./Build
