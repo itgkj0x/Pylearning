@@ -1,5 +1,5 @@
 import glob
-import subprocess
+from nbconvert import HTMLExporter
 import shutil
 import os
 
@@ -12,7 +12,10 @@ if not os.path.exists('Build/html'):
 
 while i <= (len(files)-1):
     pathj = files[i]
-    result = subprocess.run(['jupyter', 'nbconvert','--to','html',pathj], shell=True,stdout=subprocess.PIPE)
+    html_exporter = HTMLExporter(template_name="classic")
+    HTML = html_exporter.from_filename(pathj)
     pathh = pathj.replace('.ipynb','.html')
+    with open(pathh, 'w', encoding='utf-8') as f:
+        f.write(HTML[0])
     shutil.move(pathh, './Build/html/')
     i += 1 
