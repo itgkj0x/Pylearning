@@ -9,10 +9,8 @@
 */.ipynb_checkpoints/*
 .pdf
 *pdf
-.html
-*html
 # html
-/Build/
+/Build/html/
 # IPython
 profile_default/
 ipython_config.py
