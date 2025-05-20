@@ -13971,7 +13971,224 @@ Cell <span class="ansi-green-intense-fg ansi-bold">In[11], line 1</span>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=27d31e6b"><div class="prompt input_prompt">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=27d31e6b">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>                  <span class="c1"># 関数とは無関係な変数</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">func1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>           <span class="c1"># 仮引数も関数内のみ有効</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>               <span class="c1"># func1の仮引数が対象</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">func2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+    <span class="n">func1</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+<span class="n">func2</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>10</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">TypeError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[2], line 14</span>
+<span class="ansi-green-fg">     11</span>     <span style="color: rgb(0,135,0)">print</span>(x,end<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">'</span>)
+<span class="ansi-green-fg">     13</span> <span style="color: rgb(0,135,0)">print</span>(x,end<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">'</span>)
+<span class="ansi-green-intense-fg ansi-bold">---&gt; 14</span> func2()
+<span class="ansi-green-fg">     15</span> <span style="color: rgb(0,135,0)">print</span>(x)
+
+<span class="ansi-red-intense-fg ansi-bold">TypeError</span>: func2() missing 1 required positional argument: 'x'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=1f405a63"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E5%90%8C%E4%B8%80%E5%90%8D%E3%81%AE%E5%A4%89%E6%95%B0">同一名の変数<a class="anchor-link" href="#%E5%90%8C%E4%B8%80%E5%90%8D%E3%81%AE%E5%A4%89%E6%95%B0">¶</a></h3><ul>
+<li>元々あった同一名の変数名は関数呼び出しで一時的に見えなくなる</li>
+<li><code>return</code>とともに再使用できるようになる</li>
+<li>下記は3個の$x$の使用されている範囲とその値な関係を示す<ul>
+<li>矢印が上に進むと関数呼び出す,下に進むと<code>return</code>を表す</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=af0f7343"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E5%A4%89%E6%95%B0%E3%81%AE%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97">変数のスコープ<a class="anchor-link" href="#%E5%A4%89%E6%95%B0%E3%81%AE%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97">¶</a></h3><ul>
+<li>スコープ:ある変数の値を参照,変更可能な範囲</li>
+<li>スコープの種類<ul>
+<li>ローカルスコープ(局所スコープ):<ul>
+<li>ある範囲内(関数の中など)でのみ有効</li>
+<li>ローカル変数</li>
+</ul>
+</li>
+<li>グローバルスコープ(大域スコープ):<ul>
+<li>プログラムファイル全体で有効</li>
+<li>モジュールスコープとも呼ばれる</li>
+<li>グローバル変数</li>
+</ul>
+</li>
+<li>ビルトインスコープ<ul>
+<li><code>print()</code>など最初から組み込まれた関数などのスコープ</li>
+<li>変わることがないので意識しなくてもよい</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=d5960fe9"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E5%A4%89%E6%95%B0%E3%81%A8%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E5%A4%89%E6%95%B0%E3%81%AE%E4%BE%8B">ローカル変数とグローバル変数の例<a class="anchor-link" href="#%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E5%A4%89%E6%95%B0%E3%81%A8%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E5%A4%89%E6%95%B0%E3%81%AE%E4%BE%8B">¶</a></h3><ul>
+<li>下記の例では<code>add()</code>の$w$変数と<code>main()</code>の$w$の別変数</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ecbd112c">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="mi">10</span>                  <span class="c1"># グローバル変数</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>       <span class="c1"># ローカル変数 w,x,y</span>
+    <span class="k">return</span> <span class="n">w</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">a</span><span class="o">=</span><span class="mi">10</span>                <span class="c1"># ローカル変数 a</span>
+    <span class="n">b</span><span class="o">=</span><span class="mi">20</span>                <span class="c1"># ローカル変数 b</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">add</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>       <span class="c1"># ローカル変数 w,a,b</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+<span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>40
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=d8f34cab"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Jupyter-Notebook%E3%81%A8%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E5%A4%89%E6%95%B0">Jupyter Notebookとグローバル変数<a class="anchor-link" href="#Jupyter-Notebook%E3%81%A8%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E5%A4%89%E6%95%B0">¶</a></h3><ul>
+<li>JupyterNotebookでは入力欄が変わってもグローバル関数や関数定義は有効である</li>
+<li>入力欄で上下よりも番号が重要である</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=335a3833">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="mi">10</span>          <span class="c1"># グローバル関数</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>   <span class="c1"># addにローカル関数</span>
+    <span class="k">return</span> <span class="n">w</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=af170a06">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">a</span><span class="o">=</span><span class="mi">10</span>               <span class="c1"># ローカル変数a</span>
+    <span class="n">b</span><span class="o">=</span><span class="mi">20</span>               <span class="c1"># ローカル変数b</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">z</span>     <span class="c1"># zは前の欄で作成</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+<span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>40
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=b1b06dd8"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E3%81%BE%E3%81%A8%E3%82%81">まとめ<a class="anchor-link" href="#%E3%81%BE%E3%81%A8%E3%82%81">¶</a></h2><ul>
+<li>リスト内包表記<ul>
+<li>リストの要素の条件を指定してリストを生成する方法</li>
+<li>一行で様々な形式のリストを作成できる</li>
+</ul>
+</li>
+<li>関数定義<ul>
+<li>処理に名前を付けた再利用する枠組み</li>
+<li>関数名、仮引数、戻り値を定義時に決める</li>
+<li>呼び出し時に実引数を指定する</li>
+<li><code>return</code>文<ul>
+<li>関数の制御を呼び出し元に戻す文</li>
+<li>式を指定して戻り値を指定できる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>スコープ<ul>
+<li>関数に対応した変数の有効範囲</li>
+<li>グローバル変数とローカル変数を分けて考える</li>
+<li>グローバル変数は少ないほどプログラムの管理が楽になる</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=49b725e1"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 </div>
