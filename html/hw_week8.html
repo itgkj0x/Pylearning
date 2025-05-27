@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>week7</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
+<title>hw_week8</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
   import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
 </script>
@@ -13087,51 +13087,366 @@ div#notebook {
 <main>
 <div class="border-box-sizing" id="notebook" tabindex="-1">
 <div class="container" id="notebook-container">
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=a19898a5"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e49e8154"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E5%9F%BA%E7%A4%8E%E7%AC%AC7%E5%9B%9E">プログラミング基礎第7回<a class="anchor-link" href="#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E5%9F%BA%E7%A4%8E%E7%AC%AC7%E5%9B%9E">¶</a></h1>
+<h1 id="%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E5%9F%BA%E7%A4%8E%E7%AC%AC8%E5%9B%9E">プログラミング基礎第8回<a class="anchor-link" href="#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E5%9F%BA%E7%A4%8E%E7%AC%AC8%E5%9B%9E">¶</a></h1><p><strong>行列の扱い(Numpy)</strong></p>
+<hr/>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=085e881a"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=31600ae3"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="%E6%BC%94%E7%BF%921">演習1<a class="anchor-link" href="#%E6%BC%94%E7%BF%921">¶</a></h2>
+<h2 id="Numpy%E3%81%AE%E5%9F%BA%E6%9C%AC">Numpyの基本<a class="anchor-link" href="#Numpy%E3%81%AE%E5%9F%BA%E6%9C%AC">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=7ad335db"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=7a70fcc9"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>空欄を埋めて二つの関数を完成させよ</p>
+<h3 id="%E8%A4%87%E6%95%B0%E3%81%AE%E6%95%B0%E3%82%92%E3%81%BE%E3%81%A8%E3%82%81%E3%81%A6%E6%89%B1%E3%81%86">複数の数をまとめて扱う<a class="anchor-link" href="#%E8%A4%87%E6%95%B0%E3%81%AE%E6%95%B0%E3%82%92%E3%81%BE%E3%81%A8%E3%82%81%E3%81%A6%E6%89%B1%E3%81%86">¶</a></h3><ul>
+<li>リストを使うと複数の値をまとめて扱える</li>
+<li>しかし、リストはベクトルや行列の計算には向いていない</li>
+<li>リストの目的は複数の値をまとめることであって、計算が目的ではないためである</li>
+</ul>
+<p>加算ではなく連結になってしまう例:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=89b6ff06">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="p">)</span> <span class="c1"># 対応要素を加算したい</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1, 2, 3, 4, 5, 6, 7, 8]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=aebbacf4"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E6%95%B0%E5%80%A4%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AANumPy">数値ライブラリNumPy<a class="anchor-link" href="#%E6%95%B0%E5%80%A4%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AANumPy">¶</a></h3><p>Numpyは[]を簡単かつ高速に行う[]である<br/>
+<a href="https://numpy.org/">トップページ</a>の日本語訳</p>
+<blockquote>
+<p>NumpyはPythonによる科学記述計算の基本パッケージです。<br/>
+特に以下を含みます。</p>
 <ul>
-<li><code>avg(a)</code>:数値リストaの平均値を返す</li>
-<li><code>abglist(a)</code>:数値リストのリストaから各平均値のリストを返す<ul>
-<li>どちらもリストはタプルでもよい</li>
+<li>強力なN次元配列オブジェクト</li>
+<li>洗練された関数</li>
+<li>C/C++とFortranコードと統合するためのツール</li>
+<li>有用な線形代数,フーリエ変換,乱数機能</li>
+</ul>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=81b37a91">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span> <span class="c1"># 使用できるかどうかの確認方法</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=7ea439db"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E7%94%A8%E8%AA%9E%E3%81%AE%E7%A2%BA%E8%AA%8D">用語の確認<a class="anchor-link" href="#%E7%94%A8%E8%AA%9E%E3%81%AE%E7%A2%BA%E8%AA%8D">¶</a></h3><p><strong>数値計算</strong></p>
+<p>方程式から得た解の数式に実際の値をあてはめたり、代数や解析の手法では解けない問題を実際に近似を使って解く計算のこと。</p>
+<p><strong>ライブラリ</strong></p>
+<p>libraryとは図書館。プログラミングではよく使われるプログラムの部品を集めたもの。通常は関数の形で使用できる。</p>
+<p><strong>モジュール</strong></p>
+<p>moduleとは各要素。Pythonでは、関係する関数の定義などのコードをまとめて扱う単位。</p>
+<p><strong>パッケージ</strong></p>
+<p>packageとは一括/梱包。pythonモジュールでは副モジュールで階層構造を構成でき、そのまとまりをパッケージと呼ぶ。</p>
+<p><strong>import</strong></p>
+<p>輸入/持ち込むの意味。pythonの予約語。モジュールを取り込んで使用できる状態にすることを意味する</p>
+<blockquote>
+<p>用語の使い方:<br/>
+パッケージAのモジュールをすべて取り込むには[]とする<br/>
+パッケージAのモジュールBを取り込むには[]とする</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=6c1cd05f"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="NumPy%E3%81%AE%E5%9F%BA%E6%9C%AC">NumPyの基本<a class="anchor-link" href="#NumPy%E3%81%AE%E5%9F%BA%E6%9C%AC">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ad8653b5">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>  <span class="c1">#取り込んで名前をnpにする</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=bd5d7bbe">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">()</span>  <span class="c1"># オブジェクトの作成</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>  <span class="c1"># 要素ごとの加算</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=0228a583"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>import...as</code>はプログラム(一つのノート)の中で一度だけ行う</li>
+<li>上記は<code>numpy</code>全体を取り込んで、<code>np</code>という名前使う指定</li>
+<li>予約語<code>as</code>を指定しない場合には、上記の<code>np</code>を<code>numpy</code>と指定する</li>
+<li><code>np.array()</code>は、<code>numpy</code>独自の形式の値を返す関数<ul>
+<li>返された値は一般的にオブジェクトと呼ぶ形式</li>
 </ul>
 </li>
+<li>ここでは[1,2,3,4,5]などのリストを初期値と指定している</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=0b70ab21">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=1677dbed"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E7%A2%BA%E8%AA%8D">オブジェクトの確認<a class="anchor-link" href="#%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E7%A2%BA%E8%AA%8D">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=11f7d11e">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>   <span class="c1"># リストの場合</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[2, 3, 4, 5]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a10f7c77">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=38152c96">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=36208869">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># 変数の型の確認</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>list</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=42073625">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>   <span class="c1"># 計算結果の型の確認</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>list</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=b312bbbc"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>ndarrayはn次元配列(n-dimentional array)の省略語</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=35cba9ab"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E8%A1%A8%E7%A4%BA%E7%B5%90%E6%9E%9C%E3%81%AB%E6%B3%A8%E6%84%8F">表示結果に注意<a class="anchor-link" href="#%E8%A1%A8%E7%A4%BA%E7%B5%90%E6%9E%9C%E3%81%AB%E6%B3%A8%E6%84%8F">¶</a></h3><ul>
+<li>printを使う場合と使わない場合とで結果表示が変わる</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=e790cde2">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([1, 2, 3, 4, 5])</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=22a59ff8">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=7a648d80">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=600770e3">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>    <span class="c1"># printで変数aの中身を表示</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1, 2, 3, 4]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=1e268823">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>  <span class="c1"># printで変数aの型を表示</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class 'list'&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=1a421f23"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E6%95%B4%E6%95%B0%E3%81%A8%E5%AE%9F%E6%95%B0%E3%81%AB%E6%B3%A8%E6%84%8F">整数と実数に注意<a class="anchor-link" href="#%E6%95%B4%E6%95%B0%E3%81%A8%E5%AE%9F%E6%95%B0%E3%81%AB%E6%B3%A8%E6%84%8F">¶</a></h3><ul>
+<li>要素に実数が混じると<code>print</code>の結果がわずかに変わる</li>
+<li>内部では整数と実数を区別して処理しているためである</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=56c6cab5">
 <div class="input">
 <div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">avg</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">avglist</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
-        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">x</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">78</span><span class="p">,</span><span class="mi">95</span><span class="p">,</span><span class="mi">87</span><span class="p">,</span><span class="mi">84</span><span class="p">,</span><span class="mi">92</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="mi">77</span><span class="p">,</span><span class="mi">96</span><span class="p">,</span><span class="mi">88</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">avglist</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)]))</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">3.0</span><span class="p">]))</span>  <span class="c1"># 実数を混ぜる</span>
 </pre></div>
 </div>
 </div>
@@ -13141,102 +13456,113 @@ div#notebook {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>87.2 [87.2, 87.0, 2.0]
+<pre>[1 2 3]
+[1. 2. 3.]
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=12306e3c"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=749a4bf1"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="%E6%BC%94%E7%BF%922">演習2<a class="anchor-link" href="#%E6%BC%94%E7%BF%922">¶</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=b517cabf"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>空欄を埋めて二つの関数を完成させよ。</p>
 <ul>
-<li><code>ampl(a,x)</code>:数値リストaの各要素をX倍したリストを返す</li>
-<li><code>prod(a)</code>:数値リストの要素の積を計算する</li>
+<li>内部のデータ型は<code>dtype</code>属性で調べられる</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=60e0fa23">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=cfa5ee85">
 <div class="input">
-<div class="prompt input_prompt">In [26]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ampl</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">e</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">a</span><span class="p">]</span>
-
-<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">ampl</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>   <span class="c1">#まずはここまで作る</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">prod</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
-        <span class="n">x</span> <span class="o">*=</span> <span class="n">e</span>
-    <span class="k">return</span> <span class="n">x</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prod</span><span class="p">(</span><span class="n">b</span><span class="p">),</span><span class="n">prod</span><span class="p">(</span><span class="n">ampl</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>  <span class="c1"># 提出する</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">3.0</span><span class="p">])</span>     <span class="c1"># 実数を混ぜる</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">dtype</span> <span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[2, 4, 6, 8, 10]
-120 3840
-</pre>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=b275c730"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=946b01db"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="%E6%BC%94%E7%BF%923">演習3<a class="anchor-link" href="#%E6%BC%94%E7%BF%923">¶</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=d145d0fc"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>二つの関数を作成せよ。</p>
-<ul>
-<li><code>fact(n)</code>:前演習の<code>prod()</code>を使って$n!$を計算する</li>
-<li><code>combi(n,k)</code>:n個からk個取り出す組み合わせ${}_n C_k$を計算する<ul>
-<li>${}_n C_k = \frac{n!}{k!(n-k)!}$ の計算を用いる</li>
-<li>結果が必ず整数になることに注意する</li>
-</ul>
-</li>
+<h3 id="%E9%85%8D%E5%88%97%E8%A6%81%E7%B4%A0%E3%81%AE%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%97%E3%81%A8%E9%85%8D%E5%88%97%E3%81%AE%E9%95%B7%E3%81%95">配列要素の取り出しと配列の長さ<a class="anchor-link" href="#%E9%85%8D%E5%88%97%E8%A6%81%E7%B4%A0%E3%81%AE%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%97%E3%81%A8%E9%85%8D%E5%88%97%E3%81%AE%E9%95%B7%E3%81%95">¶</a></h3><ul>
+<li><code>numpy</code>配列の各要素は、リストと同様に、添字で指定できる</li>
+<li>先頭要素の添字は0である点に注意</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered" id="cell-id=d8d6d1c4">
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=cf3d7703">
 <div class="input">
-<div class="prompt input_prompt">In [74]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># fact関数とcombi関数をそれぞれ定義する</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">fact</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">prod</span><span class="p">([</span><span class="mi">1</span><span class="o">+</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">combi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fact</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">//</span> <span class="p">(</span><span class="n">fact</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">fact</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">([</span><span class="n">fact</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
-<span class="nb">print</span><span class="p">([</span><span class="n">combi</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="c1">#変更してもよい</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=1045fea6"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>要素数もリスト同様に<code>len()</code>関数で分かる</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=3418978a">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[16]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>3</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=66518966"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="NumPy%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E8%A8%88%E7%AE%97">NumPyを使った計算<a class="anchor-link" href="#NumPy%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E8%A8%88%E7%AE%97">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=be4a6c05"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E5%8D%98%E4%B8%80%E3%81%AE%E5%80%A4%E3%81%A8%E8%A8%88%E7%AE%97">単一の値と計算<a class="anchor-link" href="#%E5%8D%98%E4%B8%80%E3%81%AE%E5%80%A4%E3%81%A8%E8%A8%88%E7%AE%97">¶</a></h3><ul>
+<li><code>numpy</code>配列と単一の値との演算は、配列のすべての要素に対して同じ操作を行うことになる</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a6f882f9">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>     <span class="c1"># すべての要素を2倍</span>
 </pre></div>
 </div>
 </div>
@@ -13246,11 +13572,93 @@ div#notebook {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[1, 1, 2, 6, 24]
-[1, 4, 6, 4, 1]
+<pre>[2 4 6]
 </pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=28d48e66">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=9ff5cd95"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote>
+<p>数学では$n$個の数$x_1,x_2,....,x_n$の並びを$n$次元ベクトルと呼ぶ。
+numpyを使うとベクトルやスカラー(単一の値)の積やベクトル同士の演算が「*」や「+」などの演算子でできる</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e783a2d1"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E5%86%85%E7%A9%8D">内積<a class="anchor-link" href="#%E5%86%85%E7%A9%8D">¶</a></h3><blockquote>
+<p>$n$次元ベクトル$x$,$y$に対して,$x \circ y$を$x$と$y$の内積といい、
+$$ x\circ y = x_1y_1+x_2y_2+...+x_ny_n = \sum_{i=1}^{n}x_iy_i$$
+と定義される</p>
+</blockquote>
+<ul>
+<li>二つの<code>numpy</code>配列に*を適用すると各要素の積が得られる</li>
+<li>内積を計算するには[]または[]を使う</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=be2366cb">
+<div class="input">
+<div class="prompt input_prompt">In [19]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">()</span> <span class="c1"># 関数を使った内積</span>
+<span class="nb">print</span><span class="p">()</span> <span class="c1"># 演算子の場合</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=bba88694"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="%E5%86%85%E7%A9%8D%E3%82%92markdown%E3%81%A7%E6%9B%B8%E3%81%8F%E3%81%AB%E3%81%AF">内積をmarkdownで書くには<a class="anchor-link" href="#%E5%86%85%E7%A9%8D%E3%82%92markdown%E3%81%A7%E6%9B%B8%E3%81%8F%E3%81%AB%E3%81%AF">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=20fe78af"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span>$$ 
+x\circ y 
+= x<span class="ge">_1y_</span>1+x_2y_2+...+x_ny_n 
+= \sum_{i=1}^{n}x_iy_i
+$$
+</pre></div>
 </div>
 </div>
 </div>
