@@ -5,8 +5,10 @@ import os
 
 files = glob.glob("Notebook/*/*.ipynb")
 
-if not os.path.exists('Build/html'):
-    os.makedirs('Build/html')
+if os.path.exists('Build/html'):
+    shutil.rmtree('Build/html')
+
+os.makedirs('Build/html')
 
 for pathj in files:
     html_exporter = HTMLExporter(template_name="classic")
