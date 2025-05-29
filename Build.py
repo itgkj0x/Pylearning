@@ -5,8 +5,6 @@ import os
 
 files = glob.glob("Notebook/*/*.ipynb")
 
-i = 0
-
 if not os.path.exists('Build/html'):
     os.makedirs('Build/html')
 
