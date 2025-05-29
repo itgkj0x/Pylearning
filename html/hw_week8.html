@@ -13098,7 +13098,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered" id="cell-id=31600ae3"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Numpy%E3%81%AE%E5%9F%BA%E6%9C%AC">Numpyの基本<a class="anchor-link" href="#Numpy%E3%81%AE%E5%9F%BA%E6%9C%AC">¶</a></h2>
+<h2 id="Numpy%E3%81%AE%E5%9F%BA%E6%9C%AC"><strong>Numpyの基本</strong><a class="anchor-link" href="#Numpy%E3%81%AE%E5%9F%BA%E6%9C%AC">¶</a></h2>
 </div>
 </div>
 </div>
@@ -13543,7 +13543,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered" id="cell-id=66518966"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="NumPy%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E8%A8%88%E7%AE%97">NumPyを使った計算<a class="anchor-link" href="#NumPy%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E8%A8%88%E7%AE%97">¶</a></h2>
+<h2 id="NumPy%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E8%A8%88%E7%AE%97"><strong>NumPyを使った計算</strong><a class="anchor-link" href="#NumPy%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E8%A8%88%E7%AE%97">¶</a></h2>
 </div>
 </div>
 </div>
@@ -13659,6 +13659,608 @@ x\circ y
 = \sum_{i=1}^{n}x_iy_i
 $$
 </pre></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=94179af5"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E8%A4%87%E6%95%B0%E6%AC%A1%E5%85%83%E3%81%AE%E9%85%8D%E5%88%97"><strong>複数次元の配列</strong><a class="anchor-link" href="#%E8%A4%87%E6%95%B0%E6%AC%A1%E5%85%83%E3%81%AE%E9%85%8D%E5%88%97">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=58e0c339"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97">2次元配列<a class="anchor-link" href="#2%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97">¶</a></h3><ul>
+<li>リストを要素とするリストから2次元のリストができる</li>
+<li>同様に、numpyも1次元の配列(線形配列)を要素とする2次元配列が作れる</li>
+<li>以下の2次元配列は2行4列の行列(2X4型の行列)とみなせる</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a9229f7d">
+<div class="input">
+<div class="prompt input_prompt">In [20]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">c1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[0 1 2 3]
+ [4 5 6 7]]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=11bfa790">
+<div class="input">
+<div class="prompt input_prompt">In [21]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">c2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c1</span><span class="o">+</span><span class="n">c2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[1 2 3 4]
+ [6 7 8 9]]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=8fe51fca"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%AE%E8%A6%81%E7%B4%A0%E3%81%AE%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%97%E3%81%A8%E9%85%8D%E5%88%97%E3%81%AE%E5%BD%A2">2次元配列の要素の取り出しと配列の形<a class="anchor-link" href="#2%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%AE%E8%A6%81%E7%B4%A0%E3%81%AE%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%97%E3%81%A8%E9%85%8D%E5%88%97%E3%81%AE%E5%BD%A2">¶</a></h3><ul>
+<li>2次元配列の要素も添字を使って指定できる</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=35997b00">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e8e64cc9"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>len()</code>関数では行数がわかるだけでなく、配列の次元を得るには<code>shape</code>属性を使う。結果はタプルとして得られる</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=32063405">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=dfed76d0"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E4%BE%BF%E5%88%A9%E3%81%AA%E9%96%A2%E6%95%B0"><strong>便利な関数</strong><a class="anchor-link" href="#%E4%BE%BF%E5%88%A9%E3%81%AA%E9%96%A2%E6%95%B0">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=c368199c"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="zeros,ones">zeros,ones<a class="anchor-link" href="#zeros,ones">¶</a></h3><ul>
+<li>0や1の並びを作るには以下の関数を使う</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=808043a4">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=4ee3365f">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=9134793b"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="n%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%A7%E3%81%AE0%E3%82%841%E3%81%AE%E4%B8%A6%E3%81%B3">n次元配列での0や1の並び<a class="anchor-link" href="#n%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%A7%E3%81%AE0%E3%82%841%E3%81%AE%E4%B8%A6%E3%81%B3">¶</a></h3><ul>
+<li><code>np.zeros()</code>関数と<code>np.ones</code>関数で2次元以上配列を作りたいという場合にはタプルで次元ごとの数を指定する</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=5f9ca58f">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=eb947f97">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=f8a3e4f4"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E9%A0%86%E3%81%AB%E4%B8%A6%E3%81%B9%E3%81%9F%E3%83%87%E3%83%BC%E3%82%BF">順に並べたデータ<a class="anchor-link" href="#%E9%A0%86%E3%81%AB%E4%B8%A6%E3%81%B9%E3%81%9F%E3%83%87%E3%83%BC%E3%82%BF">¶</a></h3><ul>
+<li><code>np.arange()</code>関数は値を順にならべたデータを作り出す(array range)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=c1ad46c3">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=69a79449">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=51f81339">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=6d9e72f7"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote>
+<p>使い方まとめ</p>
+<div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">([</span><span class="n">開始</span><span class="p">,]</span><span class="n">終了</span><span class="p">,[</span><span class="n">増分</span><span class="p">,][</span><span class="n">型</span><span class="p">])</span>
+</pre></div>
+<ul>
+<li>括弧の[開始],[増分],[型]は省略できる</li>
+<li>[型]は<code>dtype=float</code>の形式指定(省略時には推測される)</li>
+</ul>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=fbc1631e"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="n%E6%AC%A1%E5%85%83%E3%81%A7%E4%B8%A6%E3%81%B9%E3%81%9F%E3%83%87%E3%83%BC%E3%82%BF">n次元で並べたデータ<a class="anchor-link" href="#n%E6%AC%A1%E5%85%83%E3%81%A7%E4%B8%A6%E3%81%B9%E3%81%9F%E3%83%87%E3%83%BC%E3%82%BF">¶</a></h3><ul>
+<li>np.arange()は1次元の配列を作り出すだけ</li>
+<li>n次元に変換するにはnp.reshape()を適用する</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=234bf5bc">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=6c9cc7fa"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E9%85%8D%E5%88%97%E3%81%AE%E5%BD%A2%E7%8A%B6%E7%A2%BA%E8%AA%8D">配列の形状確認<a class="anchor-link" href="#%E9%85%8D%E5%88%97%E3%81%AE%E5%BD%A2%E7%8A%B6%E7%A2%BA%E8%AA%8D">¶</a></h3><ul>
+<li>配列の形状を調べるには<code>np.shape()</code>や<code>np.ndim()</code>を使う</li>
+<li>配列の総数を調べるには<code>np.size()</code>を使う</li>
+<li><code>numpy</code>変数の属性や組み込み関数の<code>len()</code>も使用可</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=4b5c7a55">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=6338fdbf">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=be9276c2"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E8%A8%88%E7%AE%97%E7%94%A8%E3%81%AE%E9%96%A2%E6%95%B0">計算用の関数<a class="anchor-link" href="#%E8%A8%88%E7%AE%97%E7%94%A8%E3%81%AE%E9%96%A2%E6%95%B0">¶</a></h3><ul>
+<li>合計,平均,最小,最大を計算する関数がある</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=12688841">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a0c7db50">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=541b65aa"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E8%87%AA%E4%BD%9C%E9%96%A2%E6%95%B0%E3%81%B8%E3%81%AE%E9%81%A9%E7%94%A8">自作関数への適用<a class="anchor-link" href="#%E8%87%AA%E4%BD%9C%E9%96%A2%E6%95%B0%E3%81%B8%E3%81%AE%E9%81%A9%E7%94%A8">¶</a></h3><ul>
+<li><code>numpy</code>配列は整数や実数と同じく関数で処理できる</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=d4ed1738">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=21efc32b">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=601cb66c">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=cf470bef"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E8%A1%8C%E5%88%97%E3%81%A8%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB">行列とベクトル<a class="anchor-link" href="#%E8%A1%8C%E5%88%97%E3%81%A8%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=6c9314bf"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E8%A1%8C%E5%88%97%E3%81%A8%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB%E3%81%AE%E7%A9%8D">行列とベクトルの積<a class="anchor-link" href="#%E8%A1%8C%E5%88%97%E3%81%A8%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB%E3%81%AE%E7%A9%8D">¶</a></h3><p>行列Aと縦ベクトルXの積は、行列Aの各行の行ベクトルとベクトルXとの内積を縦に並べたベクトルである。例えば、以下の計算となる</p>
+<blockquote>
+<p>$$ \left(\begin{matrix} a &amp; b \\ c &amp; d \end{matrix} \right)\left(\begin{matrix} x \\ y \end{matrix} \right) = \left(\begin{matrix} ax + by \\ cx + dy \end{matrix} \right) $$</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=7b070d7f"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="%E8%A1%8C%E5%88%97%E3%82%92Markdown%E3%81%A7%E6%9B%B8%E3%81%8F%E3%81%AB%E3%81%AF">行列をMarkdownで書くには<a class="anchor-link" href="#%E8%A1%8C%E5%88%97%E3%82%92Markdown%E3%81%A7%E6%9B%B8%E3%81%8F%E3%81%AB%E3%81%AF">¶</a></h4><p>$$ A = \left(\begin{matrix} a &amp; b \\ c &amp; d \end{matrix} \right)$$
+をMarkdownで書くには以下のように指定する</p>
+<div class="highlight"><pre><span></span>$$
+A = \left(
+    \begin{matrix}
+     a &amp; b \\
+     c &amp; d 
+    \end{matrix} 
+    \right)
+$$
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=c33a6c45"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E9%96%A2%E6%95%B0%E3%82%84%E6%BC%94%E7%AE%97%E5%AD%90%E3%81%A7%E7%A9%8D%E3%82%92%E8%A8%88%E7%AE%97">関数や演算子で積を計算<a class="anchor-link" href="#%E9%96%A2%E6%95%B0%E3%82%84%E6%BC%94%E7%AE%97%E5%AD%90%E3%81%A7%E7%A9%8D%E3%82%92%E8%A8%88%E7%AE%97">¶</a></h3><ul>
+<li>${n}\times{m}$の2次元配列とサイズ$m$の1次元配列を考える</li>
+<li><code>np.dot()</code>関数や<code>@</code>演算子を適用すると、行列とベクトルの積に対応する計算をする</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a5e95cc0">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=d40b5861"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E8%A1%8C%E5%88%97%E5%BC%8F%E3%81%A8%E9%80%86%E8%A1%8C%E5%88%97%E3%81%AE%E8%A8%88%E7%AE%97">行列式と逆行列の計算<a class="anchor-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%E3%81%A8%E9%80%86%E8%A1%8C%E5%88%97%E3%81%AE%E8%A8%88%E7%AE%97">¶</a></h3><ul>
+<li><code>numpy</code>配列を行列と見立てて、行列式や逆行列も計算できる</li>
+<li>ただし、計算誤差があるので注意する</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=64bd581e">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=4735dc03">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=5ba1eec3"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E7%95%A5%E8%AA%9E%E3%81%AE%E7%A2%BA%E8%AA%8D">略語の確認<a class="anchor-link" href="#%E7%95%A5%E8%AA%9E%E3%81%AE%E7%A2%BA%E8%AA%8D">¶</a></h3><ul>
+<li>線形代数<ul>
+<li><code>linear algebra</code> $\longrightarrow$ <code>linalg</code></li>
+</ul>
+</li>
+<li>行列<ul>
+<li><code>determinant</code> $\longrightarrow$ <code>det</code></li>
+</ul>
+</li>
+<li>逆行列<ul>
+<li><code>inverse matrix</code> $\longrightarrow$ <code>inv</code></li>
+<li><code>np.linalg.inv(c)</code></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a1e4e399"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E9%80%A3%E7%AB%8B%E6%96%B9%E7%A8%8B%E5%BC%8F%E3%81%A8%E9%80%86%E8%A1%8C%E5%88%97">連立方程式と逆行列<a class="anchor-link" href="#%E9%80%A3%E7%AB%8B%E6%96%B9%E7%A8%8B%E5%BC%8F%E3%81%A8%E9%80%86%E8%A1%8C%E5%88%97">¶</a></h3><p>以下のような連立方程式を考える。
+$$ 2x + 3y = 350 $$
+$$ 5x + 6y = 800 $$</p>
+<p>$
+A = \left(
+    \begin{matrix}
+     a &amp; b \\
+     c &amp; d 
+    \end{matrix} 
+    \right),
+a = \left(
+    \begin{matrix}
+     x \\
+     y 
+    \end{matrix} 
+    \right),
+b = \left(
+    \begin{matrix}
+     350 \\
+     800 
+    \end{matrix} 
+    \right)
+$
+とおくと、以下のように表せる。
+$$A_a=b$$
+逆行列$A^{-1}$が存在するならば$a$つまり
+$\left(
+    \begin{matrix}
+     x \\
+     y 
+    \end{matrix} 
+\right)$
+が求まる。
+$$A^{-1}A_a = A^{-1}b$$
+$$a = A^{-1}b$$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=19c7d086"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E8%A1%8C%E5%88%97%E3%81%AE%E7%A9%8D">行列の積<a class="anchor-link" href="#%E8%A1%8C%E5%88%97%E3%81%AE%E7%A9%8D">¶</a></h3><ul>
+<li>二つの<code>numpy</code>配列に[]を適用すると各要素の積になる</li>
+<li>行列と考えて積を計算するには[]または[]を使う</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=456bd18d">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=1f2f5752">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e23cee12"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E8%BB%A2%E7%BD%AE%E8%A1%8C%E5%88%97">転置行列<a class="anchor-link" href="#%E8%BB%A2%E7%BD%AE%E8%A1%8C%E5%88%97">¶</a></h3><ul>
+<li>転置行列とは$m$行$n$列の行列$A$に対して$A$の$(i,j)$要素と$(j,i)$要素を入れ替えてできる$n$行$m$列の行列のことである</li>
+<li>数学では、$A$の転置行列を、$^tA$や$A^T$などと表す</li>
+<li><code>numpy</code>で転置行列を作るには関数だけではなく、<code>T</code>属性を使う</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ad5f4927">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=418f8b8d"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%81%BE%E3%81%A8%E3%82%81">まとめ<a class="anchor-link" href="#%E3%81%BE%E3%81%A8%E3%82%81">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=816dfd4f"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>NumPyの基本<ul>
+<li><code>import numpy as np</code></li>
+<li><code>np.array</code>(リストで初期値指定)</li>
+</ul>
+</li>
+<li>NumPyを使った計算<ul>
+<li>単一値との四則演算</li>
+<li>内積:<code>dot()</code>,<code>@</code>演算子</li>
+</ul>
+</li>
+<li>複数次元の配列<ul>
+<li>リストと同じ考え方</li>
+</ul>
+</li>
+<li>便利な関数<ul>
+<li><code>zeros()</code>,<code>ones()</code>,<code>arange()</code>,<code>resharp()</code></li>
+<li><code>shape</code>,<code>ndim</code>,<code>size</code>,<code>sum</code>,<code>min</code>,<code>max</code></li>
+<li>自作関数への適用</li>
+</ul>
+</li>
+<li>行列とベクトル<ul>
+<li><code>dot()</code>,<code>@</code>演算子</li>
+<li>行列式,逆行列、行列の積、転置行列</li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 </div>
