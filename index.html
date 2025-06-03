@@ -1,37 +1,104 @@
 <!DOCTYPE html>
-<head>
-    <title>JupyterNotebook</title>
-</head>
 <html lang="ja">
+<head>
+    <meta charset="utf-8"/>
+    <title>JupyterNotebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8fafc;
+        }
+        .container {
+            max-width: 900px;
+            margin-top: 40px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            padding: 32px 40px 40px 40px;
+        }
+        h1 {
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 0.5em;
+        }
+        .section-title {
+            border-left: 6px solid #0d6efd;
+            padding-left: 12px;
+            margin-top: 2em;
+            margin-bottom: 1em;
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #0d6efd;
+            background: linear-gradient(90deg, #e3f0ff 60%, transparent 100%);
+        }
+        ul.list-group {
+            margin-bottom: 2em;
+        }
+        .list-group-item {
+            font-size: 1.1em;
+            transition: background 0.2s;
+        }
+        .list-group-item:hover {
+            background: #e3f0ff;
+        }
+        .navbar {
+            border-radius: 0 0 12px 12px;
+        }
+        .footer {
+            margin-top: 40px;
+            color: #888;
+            text-align: center;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
 <body>
-    <h1>JupyterNotebook</h1>
-    <p>Python編</p>
-    <hr>
-    <h2>予習</h2>
-    <ul>
-    <li><a href="./html/hw_week2.html">Week2</a></li>
-    <li><a href="./html/hw_week3.html">Week3</a></li>
-    <li><a href="./html/hw_week4.html">Week4</a></li>
-    <li><a href="./html/hw_week5.html">Week5</a></li>
-    <li><a href="./html/hw_week6.html">Week6</a></li>
-    <li><a href="./html/hw_week7.html">Week7</a></li>
-    <li><a href="./html/hw_week8.html">Week8</a></li>
-    <li><a href="./html/hw_week9.html">Week9</a></li>
-    <li><a href="./html/hw_week10.html">Week10</a></li>
-    </ul>
-    <hr>
-    <h2>演習</h2>
-    <ul>
-    <li><a href="./html/week2.html">Week2</a></li>
-    <li><a href="./html/week3.html">Week3</a></li>
-    <li><a href="./html/week4.html">Week4</a></li>
-    <li><a href="./html/week5.html">Week5</a></li>
-    <li><a href="./html/week6.html">Week6</a></li>
-    <li><a href="./html/week7.html">Week7</a></li>
-    <li><a href="./html/week8.html">Week8</a></li>
-    <li><a href="./html/week9.html">Week9</a></li>
-    <li><a href="./html/week10.html">Week10</a></li>
-    </ul>
-    <script src="index.js"></script>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">JupyterNotebook</span>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="mb-2">JupyterNotebook</h1>
+        <p class="lead mb-4">Python編</p>
+        <hr>
+        <div class="section-title">予習</div>
+        <ul class="list-group mb-4">
+            <li class="list-group-item"><a href="./html/hw_week2.html">Week2</a></li>
+            <li class="list-group-item"><a href="./html/hw_week3.html">Week3</a></li>
+            <li class="list-group-item"><a href="./html/hw_week4.html">Week4</a></li>
+            <li class="list-group-item"><a href="./html/hw_week5.html">Week5</a></li>
+            <li class="list-group-item"><a href="./html/hw_week6.html">Week6</a></li>
+            <li class="list-group-item"><a href="./html/hw_week7.html">Week7</a></li>
+            <li class="list-group-item"><a href="./html/hw_week8.html">Week8</a></li>
+            <li class="list-group-item"><a href="./html/hw_week9.html">Week9</a></li>
+            <li class="list-group-item"><a href="./html/hw_week10.html">Week10</a></li>
+            <li class="list-group-item"><a href="./html/hw_week11.html">Week11</a></li>
+            <li class="list-group-item"><a href="./html/hw_week12.html">Week12</a></li>
+            <li class="list-group-item"><a href="./html/hw_week13.html">Week13</a></li>
+            <li class="list-group-item"><a href="./html/hw_week14.html">Week14</a></li>
+        </ul>
+        <div class="section-title">演習</div>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="./html/week2.html">Week2</a></li>
+            <li class="list-group-item"><a href="./html/week3.html">Week3</a></li>
+            <li class="list-group-item"><a href="./html/week4.html">Week4</a></li>
+            <li class="list-group-item"><a href="./html/week5.html">Week5</a></li>
+            <li class="list-group-item"><a href="./html/week6.html">Week6</a></li>
+            <li class="list-group-item"><a href="./html/week7.html">Week7</a></li>
+            <li class="list-group-item"><a href="./html/week8.html">Week8</a></li>
+            <li class="list-group-item"><a href="./html/week9.html">Week9</a></li>
+            <li class="list-group-item"><a href="./html/week10.html">Week10</a></li>
+            <li class="list-group-item"><a href="./html/week11.html">Week11</a></li>
+            <li class="list-group-item"><a href="./html/week12.html">Week12</a></li>
+            <li class="list-group-item"><a href="./html/week13.html">Week13</a></li>
+            <li class="list-group-item"><a href="./html/week14.html">Week14</a></li>
+        </ul>
+        <div class="footer">
+            &copy; 2025 JupyterNotebook Python編
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
