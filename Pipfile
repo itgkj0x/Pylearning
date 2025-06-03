@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 nbconvert = "*"
 weasyprint = "*"
+japanize-matplotlib = "*"
 
 [dev-packages]
 
