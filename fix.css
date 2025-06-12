@@ -1,0 +1,10 @@
+<style>
+        body {
+            /* A4用紙を意識したサイズ指定 */
+            width: 172mm;
+            /* height: ; */ /* heightを無効化 */
+            height: "";
+            /* height: 251mm; ここをコメントアウト！！ */
+            page-break-after: always;
+        }
+</style>
