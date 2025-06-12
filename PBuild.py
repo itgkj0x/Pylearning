@@ -10,10 +10,10 @@ import pdfkit
 config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe')
 options = {
     'page-size': 'A4',
-    'margin-top': '0.1in',
-    'margin-right': '0.1in',
-    'margin-bottom': '0.1in',
-    'margin-left': '0.1in',
+    'margin-top': '3mm',
+    'margin-right': '2mm',
+    'margin-bottom': '3mm',
+    'margin-left': '2mm',
     'encoding': "UTF-8",
     'no-outline': None,
     'disable-smart-shrinking': '',
