@@ -13087,16 +13087,878 @@ div#notebook {
 <main>
 <div class="border-box-sizing" id="notebook" tabindex="-1">
 <div class="container" id="notebook-container">
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=2f18ff80"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=cc39073c"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E5%9F%BA%E7%A4%8E%E7%AC%AC11%E5%9B%9E"><strong>プログラミング基礎第11回</strong><a class="anchor-link" href="#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E5%9F%BA%E7%A4%8E%E7%AC%AC11%E5%9B%9E">¶</a></h1><hr/>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=9139382c"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=c7fd5dce"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E4%BB%8A%E5%9B%9E%E3%81%AE%E5%86%85%E5%AE%B9">今回の内容<a class="anchor-link" href="#%E4%BB%8A%E5%9B%9E%E3%81%AE%E5%86%85%E5%AE%B9">¶</a></h2><ul>
+<li><strong>統計学の用語</strong><ul>
+<li>母集団と標本</li>
+</ul>
+</li>
+<li><strong>データのばらつき</strong>: ばらつき具合は? 平均値に意味があるか?</li>
+<li><strong>データの代表値</strong>: データのいろいろな性質を表すもの<ul>
+<li>代表値<ul>
+<li>平均値</li>
+<li>中央値</li>
+<li>最頻値</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>度数分布表の作成</strong></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=6160cc41"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E4%BB%8A%E5%9B%9E%E3%81%AE%E8%A8%AD%E5%AE%9A">今回の設定<a class="anchor-link" href="#%E4%BB%8A%E5%9B%9E%E3%81%AE%E8%A8%AD%E5%AE%9A">¶</a></h2><p>今回も前回と同じ設定をしておく</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9714f875">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Jupyter で matplotlib を使うためのおまじない</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="c1"># Matplotlib の pyplot を取り込んで plt の名前で使う</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="c1"># NumPy を取り込んで np の名前で使う</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=5fb36ae3"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E6%AF%8D%E9%9B%86%E5%9B%A3%E3%81%A8%E6%A8%99%E6%9C%AC">母集団と標本<a class="anchor-link" href="#%E6%AF%8D%E9%9B%86%E5%9B%A3%E3%81%A8%E6%A8%99%E6%9C%AC">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=fc3b6836"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%81%99%E3%81%B9%E3%81%A6%E3%81%AF%E6%B8%AC%E5%AE%9A%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84">すべては測定できない<a class="anchor-link" href="#%E3%81%99%E3%81%B9%E3%81%A6%E3%81%AF%E6%B8%AC%E5%AE%9A%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84">¶</a></h3><p><strong>20代日本人の平均身長を求めるには?</strong></p>
+<ul>
+<li>20代日本人人口はおよそ1262万人です 。</li>
+<li>全員の身長を調べれば正確な値を計算できますが、その方法は現実的ではありません 。</li>
+</ul>
+<p>現実的には、一部の20代の身長から平均値を計算し、その値を「20代日本人の平均身長」として使用します 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=9749469e"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E6%AF%8D%E9%9B%86%E5%9B%A3%E3%81%A8%E6%A8%99%E6%9C%AC">母集団と標本<a class="anchor-link" href="#%E6%AF%8D%E9%9B%86%E5%9B%A3%E3%81%A8%E6%A8%99%E6%9C%AC">¶</a></h3><p>集団が大きすぎて全体を調べることができない場合には、集団から無作為に(ランダムに)選んで、全体を推測します 。</p>
+<ul>
+<li><strong>母集団</strong>: 本当に調べたい全体の集団</li>
+<li><strong>標本</strong>: 無作為に選んだ一部の集団</li>
+</ul>
+<blockquote>
+<p><strong>例：</strong></p>
+<p>母集団: 20代日本人<br/>
+↓ (無作為に抽出)<br/>
+標本
+↓ (20代日本人の平均を推測する)</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=8b027c98"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E3%81%B0%E3%82%89%E3%81%A4%E3%81%8D%E3%81%A8%E4%BB%A3%E8%A1%A8%E5%80%A4">ばらつきと代表値<a class="anchor-link" href="#%E3%81%B0%E3%82%89%E3%81%A4%E3%81%8D%E3%81%A8%E4%BB%A3%E8%A1%A8%E5%80%A4">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=1ac5e0e7"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E5%BA%A6%E6%95%B0%E5%88%86%E5%B8%83">度数分布<a class="anchor-link" href="#%E5%BA%A6%E6%95%B0%E5%88%86%E5%B8%83">¶</a></h3><ul>
+<li><strong>度数分布表</strong>: 標本を区間に分けて各区間ごとの個数を並べた表</li>
+<li><strong>度数分布図</strong>: 度数分布を視覚的に見るためのグラフ(ヒストグラム)</li>
+</ul>
+<p>下記は2023年4月時点での日本人の人口を10歳間隔で表したものです（単位は万人）。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">区間</th>
+<th style="text-align:center">度数</th>
+<th></th>
+<th style="text-align:center">区間</th>
+<th style="text-align:center">度数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0-9</td>
+<td style="text-align:center">908</td>
+<td></td>
+<td style="text-align:center">50-59</td>
+<td style="text-align:center">1768</td>
+</tr>
+<tr>
+<td style="text-align:center">10-19</td>
+<td style="text-align:center">1078</td>
+<td></td>
+<td style="text-align:center">60-69</td>
+<td style="text-align:center">1487</td>
+</tr>
+<tr>
+<td style="text-align:center">20-29</td>
+<td style="text-align:center">1262</td>
+<td></td>
+<td style="text-align:center">70-79</td>
+<td style="text-align:center">1632</td>
+</tr>
+<tr>
+<td style="text-align:center">30-39</td>
+<td style="text-align:center">1352</td>
+<td></td>
+<td style="text-align:center">80-89</td>
+<td style="text-align:center">975</td>
+</tr>
+<tr>
+<td style="text-align:center">40-49</td>
+<td style="text-align:center">1714</td>
+<td></td>
+<td style="text-align:center">90-</td>
+<td style="text-align:center">272</td>
+</tr>
+</tbody>
+</table>
+<p>度数分布図の分布とは、「ばらつきぐあい」という意味です 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=134f9a73"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E3%81%B0%E3%82%89%E3%81%A4%E3%81%8D">データのばらつき<a class="anchor-link" href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E3%81%B0%E3%82%89%E3%81%A4%E3%81%8D">¶</a></h3><p>様々なパターンの度数分布図に対して平均値はつねに意味を持つか？</p>
+<ol>
+<li><strong>左右対称 (正規分布)</strong>: 年齢別の身長、桜の開花日、コンビニおにぎりの重さなど</li>
+<li><strong>一定 (一様分布)</strong>: サイコロを何度も振ったときの目の出方など</li>
+<li><strong>山が二つ</strong></li>
+<li><strong>偏り</strong></li>
+<li><strong>山の途切れ</strong></li>
+</ol>
+<p>標本の特徴を分析する際には度数分布の形が重要です 。</p>
+<ul>
+<li>1や2に近い場合は、平均値に意味があります 。</li>
+<li>3,4,5に近い場合は、平均値が全体を表しているかが怪しくなります 。</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a9462e7a"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E4%BB%A3%E8%A1%A8%E5%80%A4">代表値<a class="anchor-link" href="#%E4%BB%A3%E8%A1%A8%E5%80%A4">¶</a></h3><p>代表値とは標本の傾向を見る時に使う値です 。</p>
+<ul>
+<li><strong>平均値 (mean, average)</strong>: すべてのデータ値を合計し、データ数で割った値</li>
+<li><strong>中央値 (median, 中間値, 中位数)</strong>: データを小さい順に並べたときに順番が真ん中の値。偏りがある場合に役に立ちます 。</li>
+<li><strong>最頻値 (mode)</strong>: データ値で最も度数の多い値。非対称の分布で役に立つことがあります 。</li>
+</ul>
+<p>度数分布図の形によって、これら3つの値は、近い値の場合やまったく異なる値の場合があります 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=38957e0f"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E5%B9%B3%E5%9D%87%E5%80%A4">平均値<a class="anchor-link" href="#%E5%B9%B3%E5%9D%87%E5%80%A4">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=3d5c41d3"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E5%B9%B3%E5%9D%87%E5%80%A4%E3%81%AE%E5%AE%9A%E7%BE%A9">平均値の定義<a class="anchor-link" href="#%E5%B9%B3%E5%9D%87%E5%80%A4%E3%81%AE%E5%AE%9A%E7%BE%A9">¶</a></h3><p>$n$個のデータ $x_1, x_2, ..., x_n$ に対して、その合計を個数で割った値です 。</p>
+<p>$$ \overline{x} = \frac{x_1 + x_2 + \cdots + x_n}{n} = \frac{1}{n}\sum_{i=1}^{n}x_i $$</p>
+<p>一部のデータが極端に異なると、平均値はそれらの値に引きずられます 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a1016369">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># 1人だけ「からい」判定</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span> 
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>8.571428571428571
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=86ea2998"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E5%90%8C%E4%B8%80%E3%81%AE%E5%B9%B3%E5%9D%87%E5%80%A4">同一の平均値<a class="anchor-link" href="#%E5%90%8C%E4%B8%80%E3%81%AE%E5%B9%B3%E5%9D%87%E5%80%A4">¶</a></h3><p>平均値だけでは判断を誤りそうな例</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=7cde8959">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"mean(x)="</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">','</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"mean(y)="</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">','</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"mean(z)="</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>mean(x)= 5.5,mean(y)= 5.5,mean(z)= 5.5
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=fe90be37"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>上記3つのリストは平均値がすべて5.5ですが、ヒストグラムを作成すると分布が大きく異なることがわかります 。</p>
+<p><strong>xの分布 (一様分布)</strong></p>
+<p><strong>yの分布 (両端にピークがある分布)</strong></p>
+<p><strong>zの分布 (中央にピークがある分布)</strong></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a239a892"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E4%B8%AD%E5%A4%AE%E5%80%A4">中央値<a class="anchor-link" href="#%E4%B8%AD%E5%A4%AE%E5%80%A4">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=97571ea7"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E4%B8%AD%E5%A4%AE%E5%80%A4%E3%81%A8%E3%81%AF%EF%BC%9F">中央値とは？<a class="anchor-link" href="#%E4%B8%AD%E5%A4%AE%E5%80%A4%E3%81%A8%E3%81%AF%EF%BC%9F">¶</a></h3><p>データを小さい順に並べたときに順番が真ん中の値です 。</p>
+<ul>
+<li>データ数が奇数と偶数で扱いが異なります 。<ul>
+<li><strong>奇数 ($n$)</strong>: $\frac{n+1}{2}$ 番目の値</li>
+<li><strong>偶数 ($n$)</strong>: $\frac{n}{2}$ 番目と $\frac{n}{2}+1$ 番目の値の平均値</li>
+</ul>
+</li>
+</ul>
+<p><strong>例 (奇数, n=5)</strong>
+<code>1 3 6 7 9</code><br/>
+中央値: 6</p>
+<p><strong>例 (偶数, n=6)</strong>
+<code>1 3 4 6 7 9</code><br/>
+中央値: $\frac{4+6}{2} = 5$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=88f19b09"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E6%95%B4%E5%88%97">整列<a class="anchor-link" href="#%E6%95%B4%E5%88%97">¶</a></h3><p>中央値の計算では、データを昇順または降順に並べておく必要があります 。元々の順序を保持したい場合は、リストをコピーしてからソートします 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0dae3d97">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="c1"># リストの機能, sort() メソッド</span>
+<span class="n">x</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1, 3, 5, 6, 8]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=d3143509">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="c1"># リストデータのコピー</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">x1</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">'-- sort --&gt;'</span><span class="p">,</span> <span class="n">x1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[8, 1, 6, 3, 5] -- sort --&gt; [1, 3, 5, 6, 8]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=5bd1a2e2"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E9%99%A4%E7%AE%97%E3%81%A8%E6%B7%BB%E5%AD%97">除算と添字<a class="anchor-link" href="#%E9%99%A4%E7%AE%97%E3%81%A8%E6%B7%BB%E5%AD%97">¶</a></h3><p>リストの添字（インデックス）に浮動小数点数（float）は使えません 。通常の割り算 <code>/</code> は結果がfloatになるため <code>TypeError</code> が発生します 。添字の計算には整数除算 <code>//</code> を使う必要があります 。また、リストの添字は0から始まる点にも注意が必要です 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=5e876842">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># 通常の割り算 '/' の結果はfloatになり、リストの添字に使えないためエラーになります。</span>
+<span class="c1"># x = [1, 2, 3, 4]</span>
+<span class="c1"># n = 4</span>
+<span class="c1"># index = n / 2 # 結果は2.0 (float)</span>
+<span class="c1"># print(x[index]) # TypeError</span>
+
+<span class="c1"># 整数除算 '//' を使って修正します。</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'x['</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="s1">']='</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>x[ 2 ]= 3
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=93700b58"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E4%B8%AD%E5%A4%AE%E5%80%A4%E3%81%AE%E8%A8%88%E7%AE%97">中央値の計算<a class="anchor-link" href="#%E4%B8%AD%E5%A4%AE%E5%80%A4%E3%81%AE%E8%A8%88%E7%AE%97">¶</a></h3><p>データ数が奇数か偶数かで場合分けが必要です 。結果は <code>float</code> 型に統一します 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=dfaff620">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="c1"># nは奇数</span>
+<span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span> <span class="c1"># 結果は int </span>
+<span class="n">index</span> <span class="o">-=</span> <span class="mi">1</span>       <span class="c1"># リストは0から始まる </span>
+<span class="n">median</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="c1"># 中央値, float に変換 </span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'中央値:'</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="s1">',添字:'</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>中央値: 6.0 ,添字: 2
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=c9089d75">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="c1"># nは偶数</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span> <span class="c1"># 結果は int </span>
+<span class="n">index</span> <span class="o">-=</span> <span class="mi">1</span>   <span class="c1"># リストは0から始まる </span>
+<span class="n">median</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span> <span class="c1"># 結果は float </span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'中央値:'</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">','</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'添字:'</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="s1">','</span><span class="p">,</span> <span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>中央値: 5.0,添字: 2 , 3
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=dd4a4c0b"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E6%9C%80%E9%A0%BB%E5%80%A4">最頻値<a class="anchor-link" href="#%E6%9C%80%E9%A0%BB%E5%80%A4">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=9ef3540e"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E6%9C%80%E9%A0%BB%E5%80%A4%E3%81%A8%E3%81%AF">最頻値とは<a class="anchor-link" href="#%E6%9C%80%E9%A0%BB%E5%80%A4%E3%81%A8%E3%81%AF">¶</a></h3><p>データ値で最も度数（出現回数）の多い値です 。</p>
+<p><strong>例</strong>: サイコロを10回投げたときの出目 <code>6,3, 2, 1,5,2,2,4,6,1</code> の場合、最も多く出現する「2」が最頻値です 。</p>
+<p>最頻値の計算には数式はなく、出現回数を数えて最も多いものを見つけます 。Pythonでは <code>collections</code> モジュールの <code>Counter</code> クラスが便利です 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=8448b67d"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E5%87%BA%E7%8F%BE%E5%9B%9E%E6%95%B0%E3%81%AE%E4%B8%80%E7%95%AA%E5%A4%9A%E3%81%84%E8%A6%81%E7%B4%A0%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B">出現回数の一番多い要素を調べる<a class="anchor-link" href="#%E5%87%BA%E7%8F%BE%E5%9B%9E%E6%95%B0%E3%81%AE%E4%B8%80%E7%95%AA%E5%A4%9A%E3%81%84%E8%A6%81%E7%B4%A0%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B">¶</a></h3><p><code>Counter</code> クラスの <code>most_common()</code> メソッドは、出現回数の多い順に「(要素, 出現回数)」というタプルのリストを返します 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=75c93109">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">dlist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">dlist</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="c1"># 先頭の二つの情報 </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[(2, 3), (6, 2), (1, 2), (3, 1), (5, 1), (4, 1)]
+[(2, 3), (6, 2)]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=3a58bf69"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>タプルのリストから先頭タプルの先頭の値を取得することで最頻値が得られます。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=599f375b">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">mc</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="s1">', '</span><span class="p">,</span> <span class="n">mc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">', '</span><span class="p">,</span> <span class="n">mc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[(2, 3)] ,  (2, 3) ,  2
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=3a8a87b7"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E9%96%A2%E6%95%B0%E3%81%AB%E3%81%BE%E3%81%A8%E3%82%81%E3%82%8B">関数にまとめる<a class="anchor-link" href="#%E9%96%A2%E6%95%B0%E3%81%AB%E3%81%BE%E3%81%A8%E3%82%81%E3%82%8B">¶</a></h3><p>サイコロを10回投げたときの出目の分布の最頻値を求める関数を作成します 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ad22ff4a">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="c1"># 最頻値を求める関数</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_mode</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+    <span class="n">mc</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># main の処理</span>
+<span class="n">dlist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">mode</span> <span class="o">=</span> <span class="n">calc_mode</span><span class="p">(</span><span class="n">dlist</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'サイコロの出目の最頻値は'</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>サイコロの出目の最頻値は 2
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=84d37c1c"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E4%BF%AE%E6%AD%A3%E7%89%88:-%E8%A4%87%E6%95%B0%E3%81%AE%E6%9C%80%E9%A0%BB%E5%80%A4%E3%81%AB%E5%AF%BE%E5%BF%9C">修正版: 複数の最頻値に対応<a class="anchor-link" href="#%E4%BF%AE%E6%AD%A3%E7%89%88:-%E8%A4%87%E6%95%B0%E3%81%AE%E6%9C%80%E9%A0%BB%E5%80%A4%E3%81%AB%E5%AF%BE%E5%BF%9C">¶</a></h3><p><code>most_common()</code> で得られたリスト全体から、最大の出現回数を持つ要素をすべてリストアップするように関数を修正します 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=995cce17">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="c1"># 最頻値を求める関数 (複数対応)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_modes</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+    <span class="n">mclist</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span>     <span class="c1"># 出現回数の情報全体 </span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">mclist</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="n">maxcnt</span> <span class="o">=</span> <span class="n">mclist</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>        <span class="c1"># 最大の出現回数 </span>
+    <span class="n">modes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">mclist</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="n">maxcnt</span><span class="p">:</span>          <span class="c1"># 最大出現回数と同じ </span>
+            <span class="n">modes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>      <span class="c1"># リストに加える </span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">modes</span>
+
+<span class="c1"># main の処理</span>
+<span class="n">dlist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">modes</span> <span class="o">=</span> <span class="n">calc_modes</span><span class="p">(</span><span class="n">dlist</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'サイコロの出目の最頻値は:'</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">' '</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">mode</span> <span class="ow">in</span> <span class="n">modes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">' '</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>サイコロの出目の最頻値は: 6 2 
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=03ca4229"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E5%BA%A6%E6%95%B0%E5%88%86%E5%B8%83%E8%A1%A8%E3%81%AE%E4%BD%9C%E6%88%90">度数分布表の作成<a class="anchor-link" href="#%E5%BA%A6%E6%95%B0%E5%88%86%E5%B8%83%E8%A1%A8%E3%81%AE%E4%BD%9C%E6%88%90">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=5f031aec"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>most_common()</code> メソッドを引数なしで使うと、すべての要素の頻度が得られます 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a71d6e63"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E5%BA%A6%E6%95%B0%E5%88%86%E5%B8%83%E8%A1%A8%E3%81%AE%E5%87%BA%E5%8A%9B">度数分布表の出力<a class="anchor-link" href="#%E5%BA%A6%E6%95%B0%E5%88%86%E5%B8%83%E8%A1%A8%E3%81%AE%E5%87%BA%E5%8A%9B">¶</a></h3><p><code>most_common()</code> の結果は頻度の降順で出力されます 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9d697097">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">freq_table</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Dice</span><span class="se">\t</span><span class="s2">Frequency"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">most_common</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+<span class="c1"># main の処理</span>
+<span class="n">dlist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">freq_table</span><span class="p">(</span><span class="n">dlist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dice	Frequency
+6 	 3
+2 	 3
+1 	 2
+3 	 1
+4 	 1
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=21f4dbcc"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E4%BF%AE%E6%AD%A3%E7%89%88:-%E5%BA%A6%E6%95%B0%E5%88%86%E8%A1%A8%E3%81%AE%E5%87%BA%E5%8A%9B%EF%BC%88%E6%98%87%E9%A0%86%EF%BC%89">修正版: 度数分表の出力（昇順）<a class="anchor-link" href="#%E4%BF%AE%E6%AD%A3%E7%89%88:-%E5%BA%A6%E6%95%B0%E5%88%86%E8%A1%A8%E3%81%AE%E5%87%BA%E5%8A%9B%EF%BC%88%E6%98%87%E9%A0%86%EF%BC%89">¶</a></h3><p>タプルのリストは、<code>sort()</code> メソッドでソートできます 。タプルは先頭の要素から順に比較されるため 、一度リストとして取り出した後にソートすることで、出目の昇順に並べ替えることができます 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=29e749bb">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">freq_table_sorted</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+    <span class="n">mclist</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span> <span class="c1"># リストを一度取り出す </span>
+    <span class="n">mclist</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>                <span class="c1"># 昇順に並べ替え </span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Dice</span><span class="se">\t</span><span class="s2">Frequency"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">mclist</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+<span class="c1"># main の処理</span>
+<span class="n">dlist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">freq_table_sorted</span><span class="p">(</span><span class="n">dlist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dice	Frequency
+1 	 2
+2 	 3
+3 	 1
+4 	 1
+6 	 3
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=5e1a3615"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E9%96%A2%E6%95%B0%E3%81%AE%E4%BD%BF%E7%94%A8">ライブラリ関数の使用<a class="anchor-link" href="#%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E9%96%A2%E6%95%B0%E3%81%AE%E4%BD%BF%E7%94%A8">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=0ca69fcd"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="NumPy">NumPy<a class="anchor-link" href="#NumPy">¶</a></h3><p>NumPyには平均値 (<code>mean</code>)、中央値 (<code>median</code>) を計算する関数があります 。最頻値の関数はありませんが、<code>np.unique</code> や <code>np.bincount</code> を使うことで計算できます 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=df90d81d">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'平均値:'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">'中央値:'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="c1"># 最頻値の計算 (np.unique)</span>
+<span class="n">e</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># 要素と頻度を取得 </span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'elem ='</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">'freq = '</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>  
+<span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1"># 頻度が最大の添字を取得 </span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'mode: '</span><span class="p">,</span> <span class="n">e</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="c1"># 最頻値 </span>
+
+<span class="c1"># 最頻値の計算 (np.bincount)</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># 0から最大値までの頻度のリスト </span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'bins ='</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
+<span class="n">mode</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span> <span class="c1"># 最大値の添字が最頻値 </span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'mode: '</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>平均値: 3.2 中央値: 2.5
+elem = [1 2 3 4 5 6]
+freq =  [2 3 1 1 1 2]
+mode:  2
+bins = [0 2 3 1 1 1 2]
+mode:  2
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=260e2d4c"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E6%9C%80%E9%A0%BB%E5%80%A4">文字列の最頻値<a class="anchor-link" href="#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E6%9C%80%E9%A0%BB%E5%80%A4">¶</a></h3><p><code>Counter</code> と <code>NumPy</code> はどちらも文字列のリストを扱うことができます 。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f79c86e1">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'CAT'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'ab'</span><span class="p">,</span> <span class="s1">'E'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'D'</span><span class="p">,</span> <span class="s1">'ab'</span><span class="p">]</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[('B', 3), ('ab', 2), ('CAT', 1), ('E', 1), ('D', 1)]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=afb683af">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">'CAT'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'ab'</span><span class="p">,</span> <span class="s1">'E'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'D'</span><span class="p">,</span> <span class="s1">'ab'</span><span class="p">])</span>
+<span class="n">e</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># 重複を取り除く </span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'elem ='</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'freq ='</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1"># 最大値の添字 </span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'mode: '</span><span class="p">,</span> <span class="n">e</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="c1"># 最頻値 </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>elem = ['B' 'CAT' 'D' 'E' 'ab']
+freq = [3 1 1 1 2]
+mode:  B
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=32d06960"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E3%81%BE%E3%81%A8%E3%82%81">まとめ<a class="anchor-link" href="#%E3%81%BE%E3%81%A8%E3%82%81">¶</a></h2><ul>
+<li><strong>母集団と標本</strong>: 全体を調査できない場合、一部分（標本）をランダムに選び、全体（母集団）の性質を推測します 。</li>
+<li><strong>平均値</strong>: データの合計をデータの個数で割った値で、外れ値に影響されやすいです 。</li>
+<li><strong>中央値</strong>: データを大きさ順に並べたときの中央の値で、分布に偏りがある場合に有効です 。</li>
+<li><strong>最頻値</strong>: データの中で最も出現回数が多い値で、質的データにも使えます 。</li>
+<li><strong>度数分布表の作成</strong>: データがどの値にいくつ存在するかを集計した表で、分布の把握に用います 。</li>
+<li><strong>ライブラリ関数の使用</strong>: NumPyなどを使うと、平均値や中央値などの統計計算を効率的に行えます 。</li>
+</ul>
 </div>
 </div>
 </div>
