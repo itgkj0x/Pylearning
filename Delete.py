@@ -1,10 +1,11 @@
 import glob
 import os
 
-files = glob.glob("Build/html/*.html")
-i = 0
+def delete(*extensions):
+    for ext in extensions:
+        files = glob.glob(f"Build/{ext}/*.{ext}")
+        for file in files:
+            os.remove(file)
 
-while i <= (len(files)-1):
-    path = files[i]
-    os.remove(path)
-    i += 1
+
+a = delete("pdf", "html")
