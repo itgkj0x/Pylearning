@@ -13087,14 +13087,1414 @@ div#notebook {
 <main>
 <div class="border-box-sizing" id="notebook" tabindex="-1">
 <div class="container" id="notebook-container">
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=9d03e584"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E5%9F%BA%E7%A4%8E%E7%AC%AC13%E5%9B%9E"><strong>プログラミング基礎第13回</strong><a class="anchor-link" href="#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E5%9F%BA%E7%A4%8E%E7%AC%AC13%E5%9B%9E">¶</a></h1><hr/>
+<h1><strong>プログラミング基礎第13回</strong></h1><p>ファイルからのデータ読み込み</p>
+<hr/>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered" id="cell-id=9d07d63a"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%81%93%E3%82%8C%E3%81%BE%E3%81%A7%E3%81%AE%E8%AC%9B%E7%BE%A9%E3%81%A7%E7%9A%86%E3%81%95%E3%82%93%E3%81%AF%E3%81%99%E3%81%A7%E3%81%AB">これまでの講義で皆さんはすでに<a class="anchor-link" href="#%E3%81%93%E3%82%8C%E3%81%BE%E3%81%A7%E3%81%AE%E8%AC%9B%E7%BE%A9%E3%81%A7%E7%9A%86%E3%81%95%E3%82%93%E3%81%AF%E3%81%99%E3%81%A7%E3%81%AB">¶</a></h3><ul>
+<li>条件分岐や繰り返し処理ができる</li>
+<li>行列計算や物理演算ができる</li>
+<li>データ(計算結果)を図示できる</li>
+<li>簡単な統計量の計算ができる</li>
+</ul>
+<h3 id="%E4%BB%8A%E6%97%A5%E3%81%AE%E7%9B%AE%E6%A8%99">今日の目標<a class="anchor-link" href="#%E4%BB%8A%E6%97%A5%E3%81%AE%E7%9B%AE%E6%A8%99">¶</a></h3><ul>
+<li>ファイルからデータを読み込めるようになる</li>
+<li>読み込んだデータに対して処理できるようになる</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF">ファイルの読み込み<a class="anchor-link" href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">使用するファイル<a class="anchor-link" href="#%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">¶</a></h3><ul>
+<li>ファイル名は <code>mydata01.txt</code></li>
+<li>ファイルの内容</li>
+</ul>
+<pre><code>2
+3
+5
+7
+11
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E6%93%8D%E4%BD%9C">はじめてのファイル操作<a class="anchor-link" href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E6%93%8D%E4%BD%9C">¶</a></h3><ul>
+<li>組み込み関数 <code>open()</code> を使いファイルを開く</li>
+<li><code>readlines()</code> メソッドでファイルを読み込みリストを作成する
+    <ul>
+<li>リストの要素はファイルの各行に対応する</li>
+</ul>
+</li>
+<li>ファイルは開いたら <code>close()</code> で閉じる必要がある</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata01.txt'</span><span class="p">)</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span> <span class="c1"># 1度にすべて読み込む</span>
+<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c1"># ファイルを閉じる</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['2\n', '3\n', '5\n', '7\n', '11']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>リスト中に'\n'だけの要素があると後でエラーが起きる</li>
+<li>mydata01.txtを編集して空行をなくすこと</li>
+<li>最後が'11\n'でなく'11'でも問題はない</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1%E8%A1%8C%E3%81%94%E3%81%A8%E3%81%AB%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80">1行ごとに読み込む<a class="anchor-link" href="#1%E8%A1%8C%E3%81%94%E3%81%A8%E3%81%AB%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%80">¶</a></h3><ul>
+<li><code>readline()</code> メソッドを利用して1行だけ読み込む</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata01.txt'</span><span class="p">)</span>
+<span class="n">line1</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span> <span class="c1"># 単数形で指定(sがない)</span>
+<span class="n">line2</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">line1</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> <span class="c1"># 読み込んだ文字に改行文字があるため</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">line2</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>2
+3
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>組み込み関数 <code>next()</code> を利用する方法</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># 組み込み関数の next() を利用する方法</span>
+<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata01.txt'</span><span class="p">)</span>
+<span class="n">line1</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="c1"># 少し短い指定</span>
+<span class="n">line2</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">line1</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">line2</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>2
+3
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>どちらの出力もprint()ごとに改行されていることに注意</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="for%E6%96%87%E3%81%A8%E3%81%AE%E7%B5%84%E3%81%BF%E5%90%88%E3%82%8F%E3%81%9B">for文との組み合わせ<a class="anchor-link" href="#for%E6%96%87%E3%81%A8%E3%81%AE%E7%B5%84%E3%81%BF%E5%90%88%E3%82%8F%E3%81%9B">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>readline()</code>メソッドの結果を変数に入れてから<code>for</code>文で利用</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata01.txt'</span><span class="p">)</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>2
+3
+5
+7
+11</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>readline()</code>メソッドをそのままfor文で利用</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata01.txt'</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+
+<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>2
+3
+5
+7
+11</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>open()</code>の結果はリストのように扱える</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata01.txt'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>2
+3
+5
+7
+11</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>ただし、リストではない。
+(添え字は指定できない)</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata01.txt'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> 
+<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">TypeError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[7], line 2</span>
+<span class="ansi-green-fg">      1</span> file <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">open</span>(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">mydata01.txt</span><span style="color: rgb(175,0,0)">'</span>)
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 2</span> <span style="color: rgb(0,135,0)">print</span>(file[<span style="color: rgb(98,98,98)">0</span>], end<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">'</span>) 
+<span class="ansi-green-fg">      3</span> file<span style="color: rgb(98,98,98)">.</span>close()
+
+<span class="ansi-red-intense-fg ansi-bold">TypeError</span>: '_io.TextIOWrapper' object is not subscriptable</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E6%95%B0%E5%80%A4%E3%81%A8%E3%81%97%E3%81%A6%E6%89%B1%E3%81%86">数値として扱う<a class="anchor-link" href="#%E6%95%B0%E5%80%A4%E3%81%A8%E3%81%97%E3%81%A6%E6%89%B1%E3%81%86">¶</a></h3><p>読み込んだ内容は文字列なので、計算には<code>int()</code>などで型変換が必要</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata01.txt'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">))</span> <span class="c1"># int に変換してリストに追加</span>
+<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n="</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'sum = '</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'ave = '</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>n= [2, 3, 4, 7, 11]
+sum =  27
+ave =  5.4
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>空のリストから<code>for</code>文で<code>append()</code>するならばリスト内記法を使う</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata01.txt'</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">]</span>
+<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n="</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"sum="</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"ave="</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>n= [2, 3, 4, 7, 11]
+sum= 27
+ave= 5.4
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%83%AA%E3%82%B9%E3%83%88%E5%86%85%E8%A8%98%E6%B3%95%E3%81%A7%E3%81%AE%E6%B3%A8%E6%84%8F">リスト内記法での注意<a class="anchor-link" href="#%E3%83%AA%E3%82%B9%E3%83%88%E5%86%85%E8%A8%98%E6%B3%95%E3%81%A7%E3%81%AE%E6%B3%A8%E6%84%8F">¶</a></h3><p>一つ一つ<code>print()</code>として確認することが大切</p>
+<ul>
+<li>演習問題に取り組む習慣としよう</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">file</span>  <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"mydata01.txt"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>   <span class="c1">#リストではない</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>      <span class="c1">#リストに変換</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'x = '</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>     <span class="c1">#出力を確認</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">[</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">x</span> <span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'s = '</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="p">[</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">x</span> <span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">' n = '</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class '_io.TextIOWrapper'&gt;
+x =  ['2\n', '3\n', '4\n', '7\n', '11']
+s =  ['2\n', '3\n', '4\n', '7\n', '11']
+ n =  [2, 3, 4, 7, 11]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="with-%E6%A7%8B%E6%96%87"><code>with</code> 構文<a class="anchor-link" href="#with-%E6%A7%8B%E6%96%87">¶</a></h3><p><code>open()</code>を<code>with</code>構文で使うと、<code>close()</code>の呼び出しが自動化される。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata01.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="c1"># ここでfileは閉じられている</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>27
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata01.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">n</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'n = </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'sum = </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'ave = </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>n = [2, 3, 5, 7, 11]
+sum = 28
+ave = 5.6
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="With%E6%A7%8B%E6%96%87%E3%81%A8%E3%83%AA%E3%82%B9%E3%83%88%E5%86%85%E5%8C%85%E8%A1%A8%E8%A8%98">With構文とリスト内包表記<a class="anchor-link" href="#With%E6%A7%8B%E6%96%87%E3%81%A8%E3%83%AA%E3%82%B9%E3%83%88%E5%86%85%E5%8C%85%E8%A1%A8%E8%A8%98">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata01.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">file</span><span class="p">]</span>
+<span class="c1"># ここで file は閉じられている</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n="</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"sum="</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"ave:="</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>n= [2, 3, 5, 7, 11]
+sum= 28
+ave:= 5.6
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%B7%BB%E5%AD%97%E3%81%A8%E3%82%B9%E3%83%A9%E3%82%A4%E3%82%B9">リストの添字とスライス<a class="anchor-link" href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%B7%BB%E5%AD%97%E3%81%A8%E3%82%B9%E3%83%A9%E3%82%A4%E3%82%B9">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E8%B2%A0%E3%81%AE%E6%B7%BB%E5%AD%97">リストの負の添字<a class="anchor-link" href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E8%B2%A0%E3%81%AE%E6%B7%BB%E5%AD%97">¶</a></h3><p>リストの添字（要素番号）は負でもよい</p>
+<ul>
+<li><code>n[-1]</code> が末尾、<code>n[-2]</code> が末尾から2番目の要素を意味する</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n="</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n[-1] ="</span><span class="p">,</span> <span class="n">n</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># 末尾</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n[-2] ="</span><span class="p">,</span> <span class="n">n</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># 末尾から2番目</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n[-len(n)] ="</span><span class="p">,</span> <span class="n">n</span><span class="p">[</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span> <span class="c1"># 先頭</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>n= [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+n[-1] = 11
+n[-2] = 10
+n[-len(n)] = 0
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E7%AF%84%E5%9B%B2%E6%8C%87%E5%AE%9A">リストの範囲指定<a class="anchor-link" href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E7%AF%84%E5%9B%B2%E6%8C%87%E5%AE%9A">¶</a></h3><p>リスト内の範囲を指定して部分リストが取り出せる（スライス）</p>
+<ul>
+<li>指定方法: <code>n[a:b]</code> は <code>a &lt;= i &lt; b</code> となる添字 <code>i</code> の要素, <code>b-a</code> が個数</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n="</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="c1"># 添字と要素が一致している</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n[2:9] ="</span><span class="p">,</span> <span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">9</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n[:9] ="</span><span class="p">,</span> <span class="n">n</span><span class="p">[:</span><span class="mi">9</span><span class="p">])</span> <span class="c1"># 先頭から</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n[2:] ="</span><span class="p">,</span> <span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span> <span class="c1"># 末尾まで</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n[:] ="</span><span class="p">,</span> <span class="n">n</span><span class="p">[:])</span> <span class="c1"># 全体</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>n= [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+n[2:9] = [2, 3, 4, 5, 6, 7, 8]
+n[:9] = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+n[2:] = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+n[:] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E7%AF%84%E5%9B%B2%E6%8C%87%E5%AE%9A%E3%81%A8%E3%81%A8%E3%81%B3%E5%B9%85">リストの範囲指定ととび幅<a class="anchor-link" href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E7%AF%84%E5%9B%B2%E6%8C%87%E5%AE%9A%E3%81%A8%E3%81%A8%E3%81%B3%E5%B9%85">¶</a></h3><p><code>n[a:b:c]</code> のようにとび幅の指定も可能</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n="</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n[::2] ="</span><span class="p">,</span> <span class="n">n</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n[::3] ="</span><span class="p">,</span> <span class="n">n</span><span class="p">[::</span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n[:9:2] ="</span><span class="p">,</span> <span class="n">n</span><span class="p">[:</span><span class="mi">9</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n[2::2] ="</span><span class="p">,</span> <span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n[2:9:2] ="</span><span class="p">,</span> <span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">9</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>n= [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+n[::2] = [0, 2, 4, 6, 8, 10]
+n[::3] = [0, 3, 6, 9]
+n[:9:2] = [0, 2, 4, 6, 8]
+n[2::2] = [2, 4, 6, 8, 10]
+n[2:9:2] = [2, 4, 6, 8]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="range-%E3%81%A8%E3%83%AA%E3%82%B9%E3%83%88">range とリスト<a class="anchor-link" href="#range-%E3%81%A8%E3%83%AA%E3%82%B9%E3%83%88">¶</a></h3><ul>
+<li><code>range()</code> の結果はリストのように振る舞うがリストではない</li>
+<li><code>list()</code> でリスト化できる</li>
+<li>リスト内包表記にも <code>range()</code> は使える</li>
+<li>範囲指定は <code>range()</code> とリストで同じ考え方（カンマとコロンが違う）</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># 型を確認</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"x ="</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">n1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span> <span class="c1"># リスト化</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n1="</span><span class="p">,</span> <span class="n">n1</span><span class="p">)</span>
+<span class="n">n2</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)]</span> <span class="c1"># リスト内包表記で使用</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"n2="</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">)])</span> <span class="c1"># 添字を指定して要素を出力</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">n1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">)])</span> <span class="c1"># リストの添字部分と同じ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class 'range'&gt;
+x = range(0, 12)
+n1= [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+n2= [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+[2, 5, 8]
+[2, 5, 8]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="CSV%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">CSVファイル<a class="anchor-link" href="#CSV%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="CSV%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A8%E3%81%AF">CSVファイルとは<a class="anchor-link" href="#CSV%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A8%E3%81%AF">¶</a></h3><ul>
+<li>「値,値,値,...」の形式の行が複数ある</li>
+<li>それぞれの値はカンマで区切られている</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="CSV%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A8%E8%A1%A8%E8%A8%88%E7%AE%97%E3%82%BD%E3%83%95%E3%83%88">CSVファイルと表計算ソフト<a class="anchor-link" href="#CSV%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A8%E8%A1%A8%E8%A8%88%E7%AE%97%E3%82%BD%E3%83%95%E3%83%88">¶</a></h3><p>Excel などの表計算ソフトで読み書きができる</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="CSV%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%A7%A3%E9%87%88">CSVファイルの解釈<a class="anchor-link" href="#CSV%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%A7%A3%E9%87%88">¶</a></h3><p>CSVファイルにおける値の名称 (RFC4180)</p>
+<ul>
+<li><strong>レコード</strong>: ある一行の値のまとまり</li>
+<li><strong>フィールド</strong>: ある一列（項目）の値のまとまり</li>
+<li><strong>ヘッダ</strong>: 一行目のレコード（見出し）</li>
+</ul>
+<blockquote>
+<p>RFC (Request for Comments): ファイルの形式などを定める技術仕様書</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="CSV%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF%E7%A2%BA%E8%AA%8D">CSVファイルの読み込み確認<a class="anchor-link" href="#CSV%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF%E7%A2%BA%E8%AA%8D">¶</a></h3><p>CSVファイルを扱うには工夫が必要</p>
+<ul>
+<li>1行ごとに処理する</li>
+<li>文字列と数が混在している</li>
+<li>カンマ(,)文字でそれぞれが区切られている</li>
+<li>1行目だけ形式が違う（常とは限らない）</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata02.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> <span class="c1"># 改行なし指定でも改行する</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>ID,LANG,MATH,SCIENCE,SOCIETY,ENGLISH
+us301010,97,66,72,80,99
+us301012,62,85,99,77,44
+us301013,78,96,82,87,71
+us301015,82,80,74,81,59</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%83%AA%E3%82%B9%E3%83%88%E3%81%A8%E3%81%97%E3%81%A6%E5%8F%96%E3%82%8A%E8%BE%BC%E3%82%93%E3%81%A7%E3%81%BF%E3%82%8B">リストとして取り込んでみる<a class="anchor-link" href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%A8%E3%81%97%E3%81%A6%E5%8F%96%E3%82%8A%E8%BE%BC%E3%82%93%E3%81%A7%E3%81%BF%E3%82%8B">¶</a></h3><p><code>readlines()</code> で一度に読み込んでリスト化</p>
+<ul>
+<li>行が要素に対応するリストができた</li>
+<li>各要素に改行文字が含まれる</li>
+<li>改行文字を取り除いた要素が欲しい</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata02.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[ ]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>['ID,LANG,MATH,SCIENCE,SOCIETY,ENGLISH\n', 'us301010,97,66,72,80,99\n', 'us301012,62,85,99,77,44\n', 'us301013,78,96,82,87,71\n', 'us301015,82,80,74,81,59']</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E6%93%8D%E4%BD%9C">文字列の操作<a class="anchor-link" href="#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E6%93%8D%E4%BD%9C">¶</a></h3><h4 id="%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E7%BD%AE%E3%81%8D%E6%8F%9B%E3%81%88%E6%93%8D%E4%BD%9C">文字列の置き換え操作<a class="anchor-link" href="#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E7%BD%AE%E3%81%8D%E6%8F%9B%E3%81%88%E6%93%8D%E4%BD%9C">¶</a></h4><p><code>str.replace(置換前, 置換後)</code></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="s1">'abc</span><span class="se">\n</span><span class="s1">'</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span> <span class="c1"># 改行文字をなしにする</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abc
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># a に変化はない</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abc
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="%E4%BB%A5%E4%B8%8B%E3%82%82%E5%BD%B9%E3%81%AB%E7%AB%8B%E3%81%A1%E3%81%9D%E3%81%86%EF%BC%88%E7%AC%AC5%E5%9B%9E%E8%B3%87%E6%96%99%E3%82%88%E3%82%8A%EF%BC%89">以下も役に立ちそう（第5回資料より）<a class="anchor-link" href="#%E4%BB%A5%E4%B8%8B%E3%82%82%E5%BD%B9%E3%81%AB%E7%AB%8B%E3%81%A1%E3%81%9D%E3%81%86%EF%BC%88%E7%AC%AC5%E5%9B%9E%E8%B3%87%E6%96%99%E3%82%88%E3%82%8A%EF%BC%89">¶</a></h4><p><code>str.split(区切り文字)</code></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">str1</span> <span class="o">=</span> <span class="s1">'2021/05/11'</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">str1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span> <span class="c1"># 文字列で区切ったリスト</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[ ]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>['2021', '05', '11']</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E6%94%B9%E8%A1%8C%E3%81%AE%E9%99%A4%E5%8E%BB">改行の除去<a class="anchor-link" href="#%E6%94%B9%E8%A1%8C%E3%81%AE%E9%99%A4%E5%8E%BB">¶</a></h3><p>まずは改行を取り除く</p>
+<ul>
+<li><code>str.replace()</code> を使う</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata02.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="s1">''</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[ ]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>['ID,LANG,MATH,SCIENCE,SOCIETY,ENGLISH', 'us301010,97,66,72,80,99', 'us301012,62,85,99,77,44', 'us301013,78,96,82,87,71', 'us301015,82,80,74,81,59']</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%82%AB%E3%83%B3%E3%83%9E%E5%8C%BA%E5%88%87%E3%82%8A">カンマ区切り<a class="anchor-link" href="#%E3%82%AB%E3%83%B3%E3%83%9E%E5%8C%BA%E5%88%87%E3%82%8A">¶</a></h3><p>文字列をカンマで分けてリストにする</p>
+<ul>
+<li><code>str.split()</code> を使う</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata02.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span> <span class="c1"># 更新</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[ ]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[['ID', 'LANG', 'MATH', 'SCIENCE', 'SOCIETY', 'ENGLISH'], ['us301010', '97', '66', '72', '80', '99'], ['us301012', '62', '85', '99', '77', '44'], ['us301013', '78', '96', '82', '87', '71'], ['us301015', '82', '80', '74', '81', '59']]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E7%B0%A1%E6%BD%94%E3%81%AB%E8%A8%98%E8%BF%B0%E3%81%99%E3%82%8B">簡潔に記述する<a class="anchor-link" href="#%E7%B0%A1%E6%BD%94%E3%81%AB%E8%A8%98%E8%BF%B0%E3%81%99%E3%82%8B">¶</a></h3><ul>
+<li><code>str.replace()</code> の結果は文字列なので、そのまま <code>str.split()</code> が使える</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="s1">'a,b,c</span><span class="se">\n</span><span class="s1">'</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[ ]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>['a', 'b', 'c']</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>file.readlines()</code> を for に使うならば、<code>file</code> の指定でも良い</li>
+<li>空のリストから for 文で <code>append()</code> するならばリスト内包表記を使う</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata02.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[ ]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[['ID', 'LANG', 'MATH', 'SCIENCE', 'SOCIETY', 'ENGLISH'], ['us301010', '97', '66', '72', '80', '99'], ['us301012', '62', '85', '99', '77', '44'], ['us301013', '78', '96', '82', '87', '71'], ['us301015', '82', '80', '74', '81', '59']]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E9%96%A2%E6%95%B0%E3%82%92%E5%AE%9A%E7%BE%A9%E3%81%99%E3%82%8B">関数を定義する<a class="anchor-link" href="#%E9%96%A2%E6%95%B0%E3%82%92%E5%AE%9A%E7%BE%A9%E3%81%99%E3%82%8B">¶</a></h3><p>ファイル名を引数にした関数を作れば汎用的に使える</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">myreadcsv</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">csv</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span><span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">csv</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">csvdata</span> <span class="o">=</span> <span class="n">myreadcsv</span><span class="p">(</span><span class="s1">'mydata02.csv'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csvdata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[ ]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[['ID', 'LANG', 'MATH', 'SCIENCE', 'SOCIETY', 'ENGLISH'], ['us301010', '97', '66', '72', '80', '99'], ['us301012', '62', '85', '99', '77', '44'], ['us301013', '78', '96', '82', '87', '71'], ['us301015', '82', '80', '74', '81', '59']]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%94%E3%81%A8%E3%81%AB%E5%87%A6%E7%90%86%E3%82%92%E8%A1%8C%E3%81%86">レコードごとに処理を行う<a class="anchor-link" href="#%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%94%E3%81%A8%E3%81%AB%E5%87%A6%E7%90%86%E3%82%92%E8%A1%8C%E3%81%86">¶</a></h3><ul>
+<li><code>enumerate()</code> は、順序数と要素のペアを返す</li>
+<li>最初の行（ヘッダ）と最初の列（レコードの第1フィールド）は別扱いが必要か？</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">csvdata</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s1">':'</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0 : ['ID', 'LANG', 'MATH', 'SCIENCE', 'SOCIETY', 'ENGLISH']
+1 : ['us301010', '97', '66', '72', '80', '99']
+2 : ['us301012', '62', '85', '99', '77', '44']
+3 : ['us301013', '78', '96', '82', '87', '71']
+4 : ['us301015', '82', '80', '74', '81', '59']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%83%98%E3%83%83%E3%83%80%E3%81%A8%E7%AC%AC1%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB%E3%83%89%E3%81%AE%E9%99%A4%E5%8E%BB">ヘッダと第1フィールドの除去<a class="anchor-link" href="#%E3%83%98%E3%83%83%E3%83%80%E3%81%A8%E7%AC%AC1%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB%E3%83%89%E3%81%AE%E9%99%A4%E5%8E%BB">¶</a></h3><ul>
+<li><code>myreadcsv()</code> が返した <code>csvdata</code> はリストなのでスライスが使える</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">csvdata</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="c1"># ヘッダを削除</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[ ]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[['us301010', '97', '66', '72', '80', '99'], ['us301012', '62', '85', '99', '77', '44'], ['us301013', '78', '96', '82', '87', '71'], ['us301015', '82', '80', '74', '81', '59']]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>さらに取り出したレコードもスライスで第1フィールドを削れる</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csvdata</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span> <span class="c1"># ヘッダを削除</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="c1"># 第1フィールド削除</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['97', '66', '72', '80', '99']
+['62', '85', '99', '77', '44']
+['78', '96', '82', '87', '71']
+['82', '80', '74', '81', '59']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E8%A8%88%E7%AE%97%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E5%A4%89%E6%8F%9B">計算するための変換<a class="anchor-link" href="#%E8%A8%88%E7%AE%97%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E5%A4%89%E6%8F%9B">¶</a></h3><p>計算には各フィールドを文字列から数値に変換する必要がある</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csvdata</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span> <span class="c1">#ヘッダを削除</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span> <span class="c1">#第1フィールド以外</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">' '</span><span class="p">)</span> <span class="c1"># 数値に変換</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>97 66 72 80 99 
+62 85 99 77 44 
+78 96 82 87 71 
+82 80 74 81 59 
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>print</code> せずにリストの形で保持する場合</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csvdata</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span> <span class="c1"># ヘッダを削除</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span> <span class="c1"># 第1フィールド以外</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[ ]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[97, 66, 72, 80, 99, 62, 85, 99, 77, 44, 78, 96, 82, 87, 71, 82, 80, 74, 81, 59]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="%E3%83%AA%E3%82%B9%E3%83%88%E5%86%85%E5%8C%85%E8%A1%A8%E8%A8%98%E3%81%A7%E7%B0%A1%E6%BD%94%E3%81%AB%E3%81%99%E3%82%8B">リスト内包表記で簡潔にする<a class="anchor-link" href="#%E3%83%AA%E3%82%B9%E3%83%88%E5%86%85%E5%8C%85%E8%A1%A8%E8%A8%98%E3%81%A7%E7%B0%A1%E6%BD%94%E3%81%AB%E3%81%99%E3%82%8B">¶</a></h3><p>リスト内包表記の方が言葉で説明しやすい</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csvdata</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span> <span class="c1"># ヘッダを削除</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[97, 66, 72, 80, 99]
+[62, 85, 99, 77, 44]
+[78, 96, 82, 87, 71]
+[82, 80, 74, 81, 59]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="CSV-%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E5%88%A9%E7%94%A8">CSV モジュールの利用<a class="anchor-link" href="#CSV-%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E5%88%A9%E7%94%A8">¶</a></h3><p>内部の動作を理解したらライブラリを使う</p>
+<ul>
+<li>CSV モジュールは標準で <code>import</code> できる</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span> <span class="c1"># 一度だけ行う</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata02.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span> <span class="c1"># 1行ずつ取り出す</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['ID', 'LANG', 'MATH', 'SCIENCE', 'SOCIETY', 'ENGLISH']
+['us301010', '97', '66', '72', '80', '99']
+['us301012', '62', '85', '99', '77', '44']
+['us301013', '78', '96', '82', '87', '71']
+['us301015', '82', '80', '74', '81', '59']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="CSV-%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E3%83%98%E3%83%83%E3%83%80%E9%99%A4%E5%8E%BB">CSV モジュールのヘッダ除去<a class="anchor-link" href="#CSV-%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E3%83%98%E3%83%83%E3%83%80%E9%99%A4%E5%8E%BB">¶</a></h3><p>ヘッダが不要な場合には <code>next()</code> で読み飛ばせる</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'mydata02.csv'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span> <span class="c1">#ヘッダを読み飛ばす</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span> <span class="c1">#第1フィールドを除き数値化したリスト</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[97, 66, 72, 80, 99]
+[62, 85, 99, 77, 44]
+[78, 96, 82, 87, 71]
+[82, 80, 74, 81, 59]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="%E3%81%BE%E3%81%A8%E3%82%81">まとめ<a class="anchor-link" href="#%E3%81%BE%E3%81%A8%E3%82%81">¶</a></h2><ul>
+<li><strong>ファイルの読み込み</strong>: <code>with open(...)</code>構文でファイルを扱い、<code>for</code>ループやリスト内包表記で効率的にデータを読み込む。</li>
+<li><strong>リストの添字とスライス</strong>: 添字<code>[]</code>やスライス<code>:</code>を使い、リストの要素を柔軟に操作する。</li>
+<li><strong>CSVファイル</strong>: カンマ区切りのデータを扱う。データをあつかいやすい</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 </div>
